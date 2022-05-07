@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<String>
+
+template<class T>
+class SafeArray {
+public:
+	int cols;
+	T* arr;
+	SafeArray(int cols){
+		this->cols = cols;
+		arr = new T[cols];
+	}
+	T operator[](int index) {
+		return arr[index];
+	}
+	int length() {
+		return cols;
+	}
+	void setValue(int index, T data) {
+		arr[index] = data;
+	}
+};
+
+
+template<class K>
+class SafeMatrix :public SafeArray<K> {
+public:
+	int rows;
+	SafeArray<K>** arrList;
+	SafeMatrix(int rows, int cols) {
+		this->rows = rows;
+		this->cols = cols;
+		arrList = new SafeArray<K>*[rows];
+		for (int i = 0; i < rows; i++) {
+			arrList[i] = new SafeArray<K>(cols);
+		}
+		
+	}
+	~SafeMatrix() {
+		if (arrList != NULL) {
+			for(int i=0; i < rows; i++)
+		}
+	}
+	SafeArray<K> operator[](int index) {
+		return *arrList[index];
+	}
+	int length() {
+		return rows;
+	}
+};
+
+
+int main() {
+	SafeMatrix<string> m(2,3);
+	//m[0][1] = "sd"; // not working
+	m[0].setValue(1, "sd");
+	cout << "value: " << m[0][1] << endl;
+	cout << m.length() << endl;
+	cout << m[0].length() << endl;
+	return 0;
+}
+
+
