@@ -8,6 +8,10 @@ class SafeArray {
 public:
 	int cols;
 	T* arr;
+	SafeArray() {
+		this->cols = 0;
+		arr = NULL;
+	}
 	SafeArray(int cols){
 		this->cols = cols;
 		arr = new T[cols];
@@ -29,6 +33,11 @@ class SafeMatrix :public SafeArray<K> {
 public:
 	int rows;
 	SafeArray<K>** arrList;
+	SafeMatrix() {
+		this->rows = 0;
+		this->cols = 0;
+		arrList = NULL;
+	}
 	SafeMatrix(int rows, int cols) {
 		this->rows = rows;
 		this->cols = cols;
@@ -38,11 +47,7 @@ public:
 		}
 		
 	}
-	~SafeMatrix() {
-		if (arrList != NULL) {
-			for(int i=0; i < rows; i++)
-		}
-	}
+
 	SafeArray<K> operator[](int index) {
 		return *arrList[index];
 	}
@@ -54,12 +59,15 @@ public:
 
 int main() {
 	SafeMatrix<string> m(2,3);
-	//m[0][1] = "sd"; // not working
+	// I donnot understand why I cannot assign value directly
+	//m[0][1] = 5; 
 	m[0].setValue(1, "sd");
 	cout << "value: " << m[0][1] << endl;
 	cout << m.length() << endl;
 	cout << m[0].length() << endl;
 	return 0;
 }
+
+
 
 
