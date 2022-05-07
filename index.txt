@@ -59,8 +59,7 @@ public:
 
 int main() {
 	SafeMatrix<string> m(2,3);
-	// I donnot understand why I cannot assign value directly
-	//m[0][1] = 5; 
+	//m[0][1] = 5; 	// not working
 	m[0].setValue(1, "sd");
 	cout << "value: " << m[0][1] << endl;
 	cout << m.length() << endl;
